@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /
+  port: 9081
+  compression:
+    mime-types:
+      - application/json
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://172.18.0.12:5432/user_ms
+    username: devuser
+    password: 123
+  application:
+    name: msuser
+  jpa:
+    open-in-view: false
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        ddl-auto: none
+        format-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-local.xml
+  sql:
+    init:
+      continue-on-error: true
