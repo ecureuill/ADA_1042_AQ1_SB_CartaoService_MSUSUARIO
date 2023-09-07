@@ -90,7 +90,7 @@ public class UserService {
     }
 
     public DependenteResponse addDependent(DependentRequest dependentRequest, String cpf) {
-        User user = findByCpf(cpf).get();
+        User user = findByCpf(cpf).orElseThrow();
         Dependent dependent = new Dependent(dependentRequest);
 
         user.getDependents().add(dependent);
@@ -99,6 +99,16 @@ public class UserService {
         dependent = dependentService.addCreditCard(dependent);
 
         return new DependenteResponse(dependent);
+    }
+
+    public void deleteDependent(String cpf, String dependentCpf) {
+        User user = findByCpf(cpf).orElseThrow();
+        Dependent dependent = user.getDependents().stream().filter(d -> d.getCpf().equals(dependentCpf)).findFirst().orElseThrow();
+
+        user.getDependents().remove(dependent);
+        userRepository.save(user);
+
+        financeService.deleteCreditCard(dependent.getAditionalCreditCard().getCardNumber());
     }
     
 }

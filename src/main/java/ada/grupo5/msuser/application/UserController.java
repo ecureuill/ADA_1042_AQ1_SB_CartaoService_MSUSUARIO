@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,14 @@ public class UserController {
         
         return ResponseEntity.ok().body(user);
     
+    }
+
+    @DeleteMapping("/{cpf}/dependents/{dependentCpf}")
+    @Transactional
+    public ResponseEntity<Void> deleteDependent(@PathVariable String cpf, @PathVariable String dependentCpf) {
+        service.deleteDependent(cpf, dependentCpf);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

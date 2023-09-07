@@ -17,5 +17,8 @@ public interface FinanceAPIClient {
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public FinanceResponse createUserCreditCard(User user);
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{cardNumber}")
+    public FinanceResponse deleteCreditCard(String cardNumber);
+
     
 }
