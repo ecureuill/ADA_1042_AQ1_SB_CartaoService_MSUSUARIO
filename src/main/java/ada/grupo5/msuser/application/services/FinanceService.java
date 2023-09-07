@@ -21,9 +21,10 @@ public class FinanceService {
     public FinanceResponse createDependentCreditCard(Dependent dependent)
     {
         return client.createDependentCreditCard(dependent);
+    }
 
     public void deleteCreditCard(String cardNumber) {
-        // client.deleteCreditCard(cardNumber);
+        client.deleteCreditCard(cardNumber);
     }
 
 }
