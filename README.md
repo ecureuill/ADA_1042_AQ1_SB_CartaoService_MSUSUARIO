@@ -30,4 +30,3 @@
 - Adicionar Dependente
 - Remover Dependente
 - Consultar Dependentes
-- Consultar Dados do Cartão Principal
