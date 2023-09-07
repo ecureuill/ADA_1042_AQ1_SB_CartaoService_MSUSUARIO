@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import ada.grupo5.msuser.application.dtos.DependentRequest;
 import ada.grupo5.msuser.domain.valueobjects.CreditCard;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -39,5 +40,10 @@ public class Dependent {
         this.name = name;
         this.cpf = cpf;
         this.aditionalCreditCard = creditCard;
+    }
+
+    public Dependent(DependentRequest dependentRequest) {
+        this.name = dependentRequest.name();
+        this.cpf = dependentRequest.cpf();
     }
 }

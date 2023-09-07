@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ada.grupo5.msuser.application.dtos.CepResponse;
 import ada.grupo5.msuser.application.dtos.DependentRequest;
+import ada.grupo5.msuser.application.dtos.DependenteResponse;
 import ada.grupo5.msuser.application.dtos.UserRequest;
 import ada.grupo5.msuser.application.dtos.UserResponse;
 import ada.grupo5.msuser.domain.dependent.Dependent;
@@ -86,6 +87,18 @@ public class UserService {
 
     public Optional<User> findByCpf(String cpf) {
         return userRepository.findByCpf(cpf);
+    }
+
+    public DependenteResponse addDependent(DependentRequest dependentRequest, String cpf) {
+        User user = findByCpf(cpf).get();
+        Dependent dependent = new Dependent(dependentRequest);
+
+        user.getDependents().add(dependent);
+
+        userRepository.save(user);
+        dependent = dependentService.addCreditCard(dependent);
+
+        return new DependenteResponse(dependent);
     }
     
 }

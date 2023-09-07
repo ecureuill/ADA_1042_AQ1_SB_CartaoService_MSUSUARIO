@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ada.grupo5.msuser.application.dtos.DependentRequest;
+import ada.grupo5.msuser.application.dtos.DependenteResponse;
 import ada.grupo5.msuser.application.dtos.UserRequest;
 import ada.grupo5.msuser.application.dtos.UserResponse;
 import ada.grupo5.msuser.application.services.UserService;
 import ada.grupo5.msuser.domain.dependent.DependentAlreadyExistException;
-import ada.grupo5.msuser.domain.user.User;
 import ada.grupo5.msuser.domain.user.UserAlreadyExistException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -48,6 +49,15 @@ public class UserController {
         var user = service.findByCpf(cpf).orElseThrow();
 
         return ResponseEntity.ok().body(new UserResponse(user));
+    }
+
+    @PostMapping("/{cpf}/dependents")
+    @Transactional
+    public ResponseEntity<DependenteResponse> createDependent(@PathVariable String cpf, @RequestBody @Valid DependentRequest dto) throws DependentAlreadyExistException {
+        var user = service.addDependent(dto, cpf);
+        
+        return ResponseEntity.ok().body(user);
+    
     }
 
 }
