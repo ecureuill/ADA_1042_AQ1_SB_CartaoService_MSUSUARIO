@@ -18,6 +18,7 @@ import ada.grupo5.msuser.domain.user.UserAlreadyExistException;
 import ada.grupo5.msuser.domain.valueobjects.Address;
 import ada.grupo5.msuser.domain.valueobjects.CreditCard;
 import ada.grupo5.msuser.infrastructure.repositories.UserRepository;
+import ada.grupo5.msuser.infrastructure.services.CepNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -29,7 +30,7 @@ public class UserService {
     private final CepService cepService;
     private final FinanceService financeService;
 
-    public UserResponse create(UserRequest cadastroUsuarioRequest) throws UserAlreadyExistException, DependentAlreadyExistException {
+    public UserResponse create(UserRequest cadastroUsuarioRequest) throws UserAlreadyExistException, DependentAlreadyExistException, CepNotFoundException {
         
         if(userRepository.existsByCpf(cadastroUsuarioRequest.cpf())){
             throw new UserAlreadyExistException();
@@ -51,7 +52,7 @@ public class UserService {
 
     }
 
-    private User createUser(UserRequest userRequestRecord) throws DependentAlreadyExistException {
+    private User createUser(UserRequest userRequestRecord) throws DependentAlreadyExistException, CepNotFoundException {
         
         CepResponse addressResponse = cepService.findAddress(userRequestRecord.addressRequestRecord().zipCode());
         

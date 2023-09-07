@@ -19,6 +19,7 @@ import ada.grupo5.msuser.application.dtos.UserResponse;
 import ada.grupo5.msuser.application.services.UserService;
 import ada.grupo5.msuser.domain.dependent.DependentAlreadyExistException;
 import ada.grupo5.msuser.domain.user.UserAlreadyExistException;
+import ada.grupo5.msuser.infrastructure.services.CepNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRequest dto) throws UserAlreadyExistException, DependentAlreadyExistException {
+    public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRequest dto) throws UserAlreadyExistException, DependentAlreadyExistException, CepNotFoundException {
         var user = service.create(dto);
         return ResponseEntity.ok().body(user);
     }

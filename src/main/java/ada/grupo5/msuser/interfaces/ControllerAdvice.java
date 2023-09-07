@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import ada.grupo5.msuser.domain.dependent.DependentAlreadyExistException;
 import ada.grupo5.msuser.domain.user.UserAlreadyExistException;
+import ada.grupo5.msuser.infrastructure.services.CepNotFoundException;
 import jakarta.validation.ValidationException;
 
 @RestControllerAdvice
@@ -17,6 +18,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler{
         ValidationException.class,
         UserAlreadyExistException.class,
         DependentAlreadyExistException.class,
+        CepNotFoundException.class
     })
     public ResponseEntity<String> handleBadRequestException(Exception e) {
         return ResponseEntity.badRequest().body(e.getMessage());
