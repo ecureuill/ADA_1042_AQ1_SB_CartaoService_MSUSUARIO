@@ -1,5 +1,7 @@
 package ada.grupo5.msuser.application.services;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
 import ada.grupo5.msuser.application.dtos.FinanceResponse;
@@ -15,16 +17,29 @@ public class FinanceService {
     private final FinanceAPIClient client;
 
     public FinanceResponse createUserCreditCard(User user){
-        return client.createUserCreditCard(user);
+        try {
+            return client.createUserCreditCard(user);
+        } catch (Exception e) {
+            return new FinanceResponse("0000000000000000", LocalDate.now().plusYears(3), "123");
+        }
     }
 
     public FinanceResponse createDependentCreditCard(Dependent dependent)
     {
-        return client.createDependentCreditCard(dependent);
+        try {
+            
+            return client.createDependentCreditCard(dependent);
+        } catch (Exception e) {
+            return new FinanceResponse("1111111111111111", LocalDate.now().plusYears(3), "123");
+        }
     }
 
     public void deleteCreditCard(String cardNumber) {
         client.deleteCreditCard(cardNumber);
+    }
+
+    public void ping() {
+        client.ping();
     }
 
 }

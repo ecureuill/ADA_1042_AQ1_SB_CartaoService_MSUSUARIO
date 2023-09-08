@@ -1,3 +1,6 @@
+finance:
+  url: http://localhost:9085
+  
 server:
   servlet:
     context-path: /

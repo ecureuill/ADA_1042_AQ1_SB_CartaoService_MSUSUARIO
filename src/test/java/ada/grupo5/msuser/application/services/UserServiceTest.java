@@ -83,7 +83,7 @@ public class UserServiceTest {
             "12345678900", 
             "Maria",
             new AddressRequest("01303001", "123", "ab"),
-            CreditCardType.OURO,
+            CreditCardType.GOLD,
             new ArrayList<DependentRequest>()
         ));
 
@@ -135,7 +135,7 @@ public class UserServiceTest {
             "12345678900", 
             "Maria",
             new AddressRequest("01303001", "123", "ab"),
-            CreditCardType.OURO,
+            CreditCardType.GOLD,
             new ArrayList<DependentRequest>()
         );
         DependentRequest dependentRequest = new DependentRequest("32132132112", "Jose");
